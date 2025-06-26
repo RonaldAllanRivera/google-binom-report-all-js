@@ -1,3 +1,8 @@
+## Day 4
+- Installed Multer for file upload handling in backend.
+- Implemented `/api/google-ads-csv` POST endpoint to accept file uploads.
+- Successfully tested upload with Postman; received and stored file with response.
+
 ## Day 3
 - Refactored React Admin panel to a dedicated component (`components/AdminPanel.js`).
 - Updated `/admin` page to use dynamic import for `AdminPanel` with SSR disabled.
