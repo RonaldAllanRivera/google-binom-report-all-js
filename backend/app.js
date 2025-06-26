@@ -1,29 +1,37 @@
 // backend/app.js
 require('dotenv').config();
 const express = require('express');
-const app = express();
-const PORT = process.env.PORT || 3001;
+const cors = require('cors');
 const multer = require('multer');
 const path = require('path');
 
+const app = express();
+const PORT = process.env.PORT || 3001;
 
-const upload = multer({
-  dest: path.join(__dirname, 'uploads/'),
-  limits: { fileSize: 10 * 1024 * 1024 }, // 10MB limit
-});
+// CORS security
+const allowedOrigin = process.env.FRONTEND_ORIGIN || "http://localhost:3000";
+if (process.env.NODE_ENV === "development") {
+  app.use(cors());
+} else {
+  app.use(
+    cors({
+      origin: allowedOrigin,
+      optionsSuccessStatus: 200,
+      credentials: true,
+    })
+  );
+}
+
+const upload = multer({ dest: path.join(__dirname, 'uploads/') });
 
 app.post('/api/google-ads-csv', upload.single('file'), (req, res) => {
-  if (!req.file) {
-    return res.status(400).json({ error: 'No file uploaded' });
-  }
-  // TODO: parse the CSV and return a preview (add this tomorrow)
+  if (!req.file) return res.status(400).json({ error: 'No file uploaded' });
   res.json({
     message: 'File uploaded successfully',
     filename: req.file.filename,
     originalname: req.file.originalname,
   });
 });
-
 
 app.get('/api/health', (req, res) => {
   res.json({ status: "OK", time: new Date() });

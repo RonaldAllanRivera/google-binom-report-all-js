@@ -1,3 +1,8 @@
+## Day 6
+- Enhanced backend security: CORS now allows all origins only in development.
+- Production CORS now restricts to origin set in `.env` (`FRONTEND_ORIGIN`).
+- Implementation is environment-aware for safer deployment.
+
 ## Day 5
 - Improved React Admin UI: added Material UI AppBar (top menu) and sidebar navigation.
 - Sidebar menu now shows icons for "Posts" and "Google Ads Upload" using Material UI icons.
