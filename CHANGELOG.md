@@ -1,3 +1,8 @@
+## Day 3
+- Refactored React Admin panel to a dedicated component (`components/AdminPanel.js`).
+- Updated `/admin` page to use dynamic import for `AdminPanel` with SSR disabled.
+- Improved code modularity and future scalability.
+
 ## Day 2
 - Backend Express server running on port 3001.
 - Implemented `/api/health` endpoint (returns JSON status).
