@@ -1,3 +1,9 @@
+## Day 5
+- Improved React Admin UI: added Material UI AppBar (top menu) and sidebar navigation.
+- Sidebar menu now shows icons for "Posts" and "Google Ads Upload" using Material UI icons.
+- Cleaned up unused imports for a more maintainable codebase.
+- Verified responsive layout and navigation are working.
+
 ## Day 4
 - Installed Multer for file upload handling in backend.
 - Implemented `/api/google-ads-csv` POST endpoint to accept file uploads.
