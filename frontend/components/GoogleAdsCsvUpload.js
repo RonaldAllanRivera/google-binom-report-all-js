@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { Card, CardContent, Typography } from "@mui/material";
+import CircularProgress from '@mui/material/CircularProgress';
 
 export default function GoogleAdsCsvUpload() {
   const [file, setFile] = useState(null);
@@ -24,6 +25,7 @@ export default function GoogleAdsCsvUpload() {
         { headers: { "Content-Type": "multipart/form-data" } }
       );
       setResponse(res.data);
+      setFile(null); // Reset file input after success
     } catch (err) {
       console.error("Upload error:", err);
       setResponse({ error: err?.response?.data?.error || "Upload failed" });
@@ -43,6 +45,7 @@ export default function GoogleAdsCsvUpload() {
           type="file"
           accept=".csv"
           onChange={handleFileChange}
+          value={file ? undefined : ""}
           style={{ display: "block", margin: "1rem 0" }}
         />
 
@@ -56,9 +59,10 @@ export default function GoogleAdsCsvUpload() {
             border: "none",
             borderRadius: "4px",
             cursor: uploading || !file ? "not-allowed" : "pointer",
+            position: "relative"
           }}
         >
-          {uploading ? "Uploading..." : "Upload"}
+          {uploading ? <CircularProgress size={20} color="inherit" /> : "Upload"}
         </button>
 
         {response && (
@@ -70,8 +74,26 @@ export default function GoogleAdsCsvUpload() {
           >
             {response.error
               ? response.error
-              : `✅ Uploaded: ${response.originalname}`}
+              : `✅ Uploaded: ${response.originalname} | Rows: ${response.rowCount}`}
           </Typography>
+        )}
+
+        {/* Preview Sample */}
+        {response && response.sample && Array.isArray(response.sample) && (
+          <pre
+            style={{
+              background: "#1f2937", // Tailwind's gray-800
+              color: "#e5e7eb",       // Tailwind's gray-200
+              marginTop: 12,
+              padding: 10,
+              borderRadius: 6,
+              fontSize: 12,
+              overflow: "auto",
+              maxHeight: 300,
+            }}
+          >
+            {JSON.stringify(response.sample, null, 2)}
+          </pre>
         )}
       </CardContent>
     </Card>

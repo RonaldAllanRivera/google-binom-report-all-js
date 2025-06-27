@@ -8,6 +8,11 @@
 - Sidebar menu now shows icons for "Posts" and "Google Ads Upload" using Material UI icons.
 - Cleaned up unused imports for a more maintainable codebase.
 - Verified responsive layout and navigation are working.
+- Improved Google Ads CSV upload UI:
+  - Added live preview of uploaded/parsed data with styled code block.
+  - Reset file input after upload.
+  - Displayed a Material UI spinner while uploading.
+- Enhanced UX for admins during CSV upload process.
 
 ## Day 4
 - Installed Multer for file upload handling in backend.
