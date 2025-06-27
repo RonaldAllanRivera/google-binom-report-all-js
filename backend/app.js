@@ -4,11 +4,14 @@ const express = require('express');
 const cors = require('cors');
 const multer = require('multer');
 const path = require('path');
+const binomRoutes = require('./routes/binom'); // <-- modular binom route
+
 
 const app = express();
 const PORT = process.env.PORT || 3001;
 const uploadedGoogleAdsReports = {}; // { [filename]: parsedDataArray }
 
+app.use(express.json());
 
 // CORS security
 const allowedOrigin = process.env.FRONTEND_ORIGIN || "http://localhost:3000";
@@ -96,7 +99,8 @@ app.post('/api/google-ads-csv', upload.single('file'), (req, res) => {
 });
 
 
-
+// Modular Binom routes
+app.use('/api/binom', binomRoutes);
 
 
 app.get('/api/health', (req, res) => {

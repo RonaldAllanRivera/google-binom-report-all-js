@@ -1,3 +1,10 @@
+## Day 7
+- Implemented Binom API sync backend (POST `/api/binom/sync`) with Django-inspired parameter structure and header-based API key.
+- Stores unfiltered raw Binom results to disk and memory for maximum auditability and flexibility.
+- Decided to defer zero-revenue row filtering until report merging stage, to ensure all source data is preserved and future-proof.
+- Confirmed modular code design with clean separation between route/controller and Binom API service logic.
+
+
 ## Day 6
 - Enhanced backend security: CORS now allows all origins only in development.
 - Production CORS now restricts to origin set in `.env` (`FRONTEND_ORIGIN`).
